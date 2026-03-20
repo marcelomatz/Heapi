@@ -1,0 +1,20 @@
+{
+  "$schema": "https://wails.io/schemas/config.v2.json",
+  "name": "heapi",
+  "outputfilename": "heapi",
+  "frontend:install": "npm install",
+  "frontend:build": "npm run build",
+  "frontend:dev:watcher": "npm run dev",
+  "frontend:dev:serverUrl": "auto",
+  "info": {
+    "companyName": "MatzLabs",
+    "productName": "Heapi",
+    "productVersion": "0.1.0",
+    "copyright": "Copyright 2026 Marcelo Matz",
+    "comments": "The API client built for developers."
+  },
+  "author": {
+    "name": "Marcelo Matz",
+    "email": "devmarcelomatz@gmail.com"
+  }
+}

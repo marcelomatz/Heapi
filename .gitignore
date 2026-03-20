@@ -1,0 +1,53 @@
+# --- Project Specific ---
+heapi.db
+heapi.db-journal
+apigo.db
+collections/*.yaml
+collections/*.json
+!collections/.gitkeep
+environments/*.yaml
+environments/*.json
+!environments/.gitkeep
+
+# --- Wails / Go ---
+build/bin/
+build/windows/installer/tmp/
+frontend/dist/
+frontend/src/wailsjs/
+bindings/
+wails.exe
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# --- Go ---
+go.sum
+vendor/
+
+# --- Node / Frontend ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.eslintcache
+.stylelintcache
+*.local
+.DS_Store
+
+# --- IDEs ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- Documentation ---
+docs/.vitepress/cache/
+docs/.vitepress/dist/
+
+# --- Website (Internal Build) ---
+website/.next/
+website/out/
+website/node_modules/
+
