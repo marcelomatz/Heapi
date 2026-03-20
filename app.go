@@ -39,15 +39,29 @@ func (a *App) startup(ctx context.Context) {
 	a.ctx = ctx
 	a.terminalManager.SetContext(ctx)
 
-	err := database.InitDB()
+	// Step 1: Initialize paths
+	if err := storage.InitPaths(); err != nil {
+		fmt.Printf("Error initializing paths: %v\n", err)
+	}
+
+	// Step 1.5: Migrate data if necessary
+	if err := storage.MigrateLocalToAppData(); err != nil {
+		fmt.Printf("Error migrating data: %v\n", err)
+	}
+
+	// Step 2: Ensure directories exist
+	err := storage.EnsureDirs()
+	if err != nil {
+		fmt.Printf("Error ensuring storage directories: %v\n", err)
+	}
+
+	// Step 3: Initialize DB
+	err = database.InitDB()
 	if err != nil {
 		fmt.Printf("Error initializing database: %v\n", err)
 		return
 	}
-	err = storage.EnsureDirs()
-	if err != nil {
-		fmt.Printf("Error ensuring storage directories: %v\n", err)
-	}
+
 	a.SeedData() // Create initial data for testing
 }
 

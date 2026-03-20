@@ -1,9 +1,9 @@
 package storage
 
 import (
-	"heapi/internal/models"
 	"encoding/json"
 	"fmt"
+	"heapi/internal/models"
 	"os"
 	"path/filepath"
 	"strings"
@@ -12,19 +12,73 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-const (
+var (
+	AppDataDir      = "."
 	CollectionsDir  = "collections"
 	EnvironmentsDir = "environments"
 )
 
+func InitPaths() error {
+	configDir, err := os.UserConfigDir()
+	if err != nil {
+		return err
+	}
+	AppDataDir = filepath.Join(configDir, "Heapi")
+	CollectionsDir = filepath.Join(AppDataDir, "collections")
+	EnvironmentsDir = filepath.Join(AppDataDir, "environments")
+	return nil
+}
+
 func EnsureDirs() error {
-	for _, dir := range []string{CollectionsDir, EnvironmentsDir} {
+	for _, dir := range []string{AppDataDir, CollectionsDir, EnvironmentsDir} {
 		if _, err := os.Stat(dir); os.IsNotExist(err) {
 			if err := os.MkdirAll(dir, 0755); err != nil {
 				return err
 			}
 		}
 	}
+	return nil
+}
+
+func MigrateLocalToAppData() error {
+	// 1. Move collections
+	localCols := "collections"
+	if _, err := os.Stat(localCols); err == nil {
+		files, _ := os.ReadDir(localCols)
+		for _, f := range files {
+			oldPath := filepath.Join(localCols, f.Name())
+			newPath := filepath.Join(CollectionsDir, f.Name())
+			if _, err := os.Stat(newPath); os.IsNotExist(err) {
+				os.Rename(oldPath, newPath)
+			}
+		}
+		// Try to remove old dir if empty
+		os.Remove(localCols)
+	}
+
+	// 2. Move environments
+	localEnvs := "environments"
+	if _, err := os.Stat(localEnvs); err == nil {
+		files, _ := os.ReadDir(localEnvs)
+		for _, f := range files {
+			oldPath := filepath.Join(localEnvs, f.Name())
+			newPath := filepath.Join(EnvironmentsDir, f.Name())
+			if _, err := os.Stat(newPath); os.IsNotExist(err) {
+				os.Rename(oldPath, newPath)
+			}
+		}
+		os.Remove(localEnvs)
+	}
+
+	// 3. Move database
+	localDB := "heapi.db"
+	if _, err := os.Stat(localDB); err == nil {
+		newDBPath := filepath.Join(AppDataDir, "heapi.db")
+		if _, err := os.Stat(newDBPath); os.IsNotExist(err) {
+			os.Rename(localDB, newDBPath)
+		}
+	}
+
 	return nil
 }
 
