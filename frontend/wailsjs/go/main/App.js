@@ -54,6 +54,10 @@ export function GetEnvironments() {
   return window['go']['main']['App']['GetEnvironments']();
 }
 
+export function GetVersion() {
+  return window['go']['main']['App']['GetVersion']();
+}
+
 export function ImportFromCurl(arg1) {
   return window['go']['main']['App']['ImportFromCurl'](arg1);
 }

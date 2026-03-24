@@ -18,6 +18,13 @@ import (
 	"gorm.io/gorm/clause"
 )
 
+// CurrentVersion is injected at build time via:
+//
+//	-ldflags "-X main.CurrentVersion=vX.Y.Z"
+//
+// Falls back to "dev" for local/dev builds.
+var CurrentVersion = "dev"
+
 // App struct
 type App struct {
 	ctx             context.Context
@@ -31,6 +38,11 @@ func NewApp() *App {
 	return &App{
 		terminalManager: service.NewTerminalManager(),
 	}
+}
+
+// GetVersion returns the current build version — callable from the frontend.
+func (a *App) GetVersion() string {
+	return CurrentVersion
 }
 
 // startup is called when the app starts. The context is saved

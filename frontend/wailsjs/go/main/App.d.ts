@@ -29,6 +29,8 @@ export function GetCollections():Promise<Array<models.Collection>>;
 
 export function GetEnvironments():Promise<Array<models.Environment>>;
 
+export function GetVersion():Promise<string>;
+
 export function ImportFromCurl(arg1:string):Promise<models.Request>;
 
 export function ImportPostman(arg1:string):Promise<models.Collection>;
