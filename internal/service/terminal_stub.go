@@ -23,11 +23,15 @@ func (tm *TerminalManager) Start(sessionID string, shellPath string, cols, rows 
 	return fmt.Errorf("terminal is not supported on this platform")
 }
 
+func (tm *TerminalManager) Write(sessionID string, data string) {
+	// no-op: terminal not supported on non-Windows platforms
+}
+
 func (tm *TerminalManager) Resize(sessionID string, cols, rows int) error {
 	return nil
 }
 
-func (tm *TerminalManager) Write(sessionID string, data string) error {
+func (tm *TerminalManager) Close(sessionID string) error {
 	return nil
 }
 
