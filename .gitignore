@@ -1,5 +1,8 @@
+# --- Certificates (private keys - never commit) ---
+*.pfx
+*.p12
+
 # --- Project Specific ---
-heapi.db
 heapi.db-journal
 apigo.db
 collections/*.yaml
