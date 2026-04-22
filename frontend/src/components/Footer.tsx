@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip";
-import { Sidebar, Terminal, Columns, Columns2, Github, BookOpen } from "lucide-react";
+import { Sidebar, Terminal, Columns, Columns2, Github, BookOpen, Activity } from "lucide-react";
+import { GetVersion } from '../../wailsjs/go/main/App';
 
 interface FooterProps {
   isLeftOpen: boolean;
@@ -27,23 +28,20 @@ const Footer = ({
   onToggleSplitView,
   envName,
 }: FooterProps) => {
+  const [version, setVersion] = useState<string>('dev');
+
+  useEffect(() => {
+    GetVersion()
+      .then(v => setVersion(v))
+      .catch(console.error);
+  }, []);
+
   return (
     <TooltipProvider>
       <footer className="h-7 border-t border-border/40 bg-card/10 backdrop-blur-md flex items-center justify-between px-3 text-[10px] font-bold text-muted-foreground/60 uppercase tracking-widest shrink-0 select-none relative z-50">
 
-        {/* Left Section - Quick Info */}
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-1.5 group cursor-default">
-            <div className="w-1.5 h-1.5 rounded-full bg-emerald-500/80 shadow-[0_0_8px_rgba(16,185,129,0.3)] animate-pulse" />
-            <span className="group-hover:text-foreground/70 transition-colors">Engine Ready</span>
-          </div>
-
-          <Separator orientation="vertical" className="h-3 bg-border/30" />
-
-          <div className="flex items-center gap-1.5 opacity-50 hover:opacity-100 cursor-pointer transition-opacity">
-            <Github className="h-3 w-3" />
-            <span>main</span>
-          </div>
+        {/* Left Section - Empty to balance flex layout if needed, though center is absolute */}
+        <div className="flex items-center gap-4 w-20">
         </div>
 
         {/* Center Section - Environment */}
@@ -60,15 +58,9 @@ const Footer = ({
             onClick={onToggleRight}
             className={`flex items-center gap-2 transition-all hover:text-foreground ${isRightOpen ? 'text-primary' : 'text-muted-foreground/60'}`}
           >
-            <span>Docs</span>
+            <span>Docs & Snippets</span>
             <BookOpen className="h-3 w-3" />
           </button>
-
-          <Separator orientation="vertical" className="h-3 bg-border/30" />
-
-          <div className="flex items-center gap-1 text-[9px] opacity-40">
-            <span>UTF-8</span>
-          </div>
         </div>
 
       </footer>

@@ -41,7 +41,7 @@
 @layer base {
   :root {
     /* Heapi Premium Dark Theme - Refined with subtle alpha for Mica */
-    --background: rgba(10, 10, 15, 0.85);
+    --background: #0A0A0F;
     --foreground: #f1f1f3;
     --muted: #111118;
     --muted-foreground: #a1a1aa;
@@ -52,10 +52,10 @@
     --card: #0d0d12;
     --card-foreground: #f1f1f3;
     
-    --bg: rgba(10, 10, 15, 0.85);
-    --bg-secondary: #0d0d12;
+    --bg: #0A0A0F;
+    --bg-secondary: rgba(0,0,0,0.1);
     --bg-elevated: #111118;
-    --bg-card: #16161f;
+    --bg-card: #0A0A0F;
     
     --text-primary: #f1f1f3;
     --text-secondary: #9999aa;

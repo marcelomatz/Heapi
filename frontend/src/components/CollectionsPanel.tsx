@@ -441,15 +441,15 @@ const SortableCollectionItem = ({
           {filteredRequests?.map((req: Request) => (
             <div
               key={req.ID}
-              className={`group flex items-center justify-between pl-9 pr-3 py-1.5 cursor-pointer transition-all relative
-              ${selectedRequestId === req.ID ? 'bg-primary/10 text-foreground border-r-2 border-primary' : 'text-muted-foreground hover:bg-white/5 hover:text-foreground'}`}
+              className={`group flex items-center justify-between px-2 py-1.5 mx-2 rounded-md cursor-pointer transition-all relative mb-0.5
+              ${selectedRequestId === req.ID ? 'bg-[var(--accent-purple-glow)] text-foreground' : 'text-muted-foreground hover:bg-white/5 hover:text-foreground'}`}
               onClick={(e) => { e.stopPropagation(); handleSelectRequest && handleSelectRequest({ ...req, collectionName: col.name }); }}
             >
               <div className="flex items-center gap-2 min-w-0 flex-1">
-                <span className={`method-badge method-${req.method.toLowerCase()} text-[8px] py-0 px-1 min-w-[34px] text-center`}>
+                <span className={`text-${req.method.toLowerCase()} text-[9px] font-extrabold w-6 shrink-0 tracking-wider`}>
                   {req.method === 'DELETE' ? 'DEL' : req.method}
                 </span>
-                <span className="text-[11px] font-medium truncate">{req.name}</span>
+                <span className="text-[12px] font-medium truncate">{req.name}</span>
               </div>
               <Button
                 variant="ghost"

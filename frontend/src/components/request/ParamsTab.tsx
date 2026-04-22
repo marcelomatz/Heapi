@@ -18,12 +18,12 @@ const ParamsTab = ({ params, onChange, onRemove }: ParamsTabProps) => (
       <div />
     </div>
     {params.map((p, i) => (
-      <div key={i} className="grid grid-cols-[30px_1fr_1.5fr_30px] gap-2 items-center group animate-in slide-in-from-left-1 duration-200 hover:bg-muted/10 rounded-lg p-1 transition-colors">
+      <div key={i} className="grid grid-cols-[30px_1fr_1.5fr_30px] gap-2 items-center group animate-in slide-in-from-left-1 duration-200 p-1 border-b border-white/5 last:border-b-0">
         <div className="flex justify-center">
           <input type="checkbox" checked={p.enabled} onChange={(e) => onChange(i, 'enabled', e.target.checked)} className="rounded-sm border-border bg-muted/50 w-3.5 h-3.5 cursor-pointer accent-primary" />
         </div>
-        <Input placeholder="key" value={p.key} onChange={(e) => onChange(i, 'key', e.target.value)} className="bg-transparent border-none text-xs h-8 focus-visible:ring-0 px-1 placeholder:opacity-30" />
-        <Input placeholder="value" value={p.value} onChange={(e) => onChange(i, 'value', e.target.value)} className="bg-transparent border-none text-xs h-8 focus-visible:ring-0 px-1 placeholder:opacity-30" />
+        <Input placeholder="key" value={p.key} onChange={(e) => onChange(i, 'key', e.target.value)} className="bg-transparent border-none text-[13px] font-mono text-primary-light h-8 focus-visible:ring-0 px-1 placeholder:opacity-30 placeholder:font-sans" style={{ color: "var(--accent-purple-light)" }} />
+        <Input placeholder="value" value={p.value} onChange={(e) => onChange(i, 'value', e.target.value)} className="bg-transparent border-none text-[13px] font-mono text-muted-foreground h-8 focus-visible:ring-0 px-1 placeholder:opacity-30 placeholder:font-sans" />
         <Button variant="ghost" size="icon" onClick={() => onRemove(i)} className="opacity-0 group-hover:opacity-100 text-muted-foreground hover:text-destructive h-6 w-6 shrink-0 transition-opacity">
           <X className="h-3 w-3" />
         </Button>

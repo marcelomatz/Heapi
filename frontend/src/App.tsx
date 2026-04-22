@@ -334,6 +334,7 @@ function App() {
         isOpen={isTerminalOpen}
         onToggle={() => setIsTerminalOpen(prev => !prev)}
         isMaximized={isMaximized}
+        isStatusBarEnabled={isStatusBarEnabled}
       />
 
       {isStatusBarEnabled && (

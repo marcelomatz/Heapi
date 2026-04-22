@@ -365,9 +365,9 @@ const RequestPanel = ({ request, selectedEnvId, isSplitView, onRefreshSidebar, o
             width: `${leftWidth}%`,
             transition: isResizingRef.current ? 'none' : 'width 0.3s ease-out'
           }} 
-          className="border-r border-border flex flex-col min-w-0 bg-bg"
+          className="border-r border-border flex flex-col min-w-0 bg-background"
         >
-          <div className="flex border-b border-border/50 px-4 gap-6 shrink-0 h-10 items-center">
+          <div className="flex border-b border-border px-5 gap-2 shrink-0 items-center">
             {[
               { id: 'params', label: 'Params' },
               { id: 'headers', label: `Headers (${headers.filter(h => h.key.trim() !== '').length})` },
@@ -379,15 +379,15 @@ const RequestPanel = ({ request, selectedEnvId, isSplitView, onRefreshSidebar, o
                 <button
                   key={t.id}
                   onClick={() => setActiveTab(t.id)}
-                  className={`text-[11px] font-semibold h-full transition-all border-b-2 px-1
-                    ${activeTab === t.id ? 'border-primary text-foreground' : 'border-transparent text-muted-foreground hover:text-foreground'}`}
+                  className={`text-[12px] capitalize h-full transition-all border-b-2 px-4 py-3
+                    ${activeTab === t.id ? 'border-primary text-foreground font-semibold' : 'border-transparent text-muted-foreground hover:text-foreground font-normal'}`}
                 >
                   {t.label}
                 </button>
               ))}
           </div>
           
-          <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
+          <div className="flex-1 overflow-y-auto bg-black/5 p-4 custom-scrollbar">
             {activeTab === 'params' && <ParamsTab params={params} onChange={handleParamChange} onRemove={removeParam} />}
             {activeTab === 'headers' && <HeadersTab headers={headers} onChange={handleHeaderChange} onRemove={removeHeader} />}
             {activeTab === 'auth' && <AuthTab auth={auth} onChange={handleAuthChange} />}

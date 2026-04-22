@@ -1,5 +1,5 @@
 import { RefObject } from 'react';
-import { Send } from "lucide-react";
+import { Send, Zap } from "lucide-react";
 
 interface RequestBarProps {
   method: string;
@@ -27,14 +27,14 @@ const RequestBar = ({
   urlInputRef,
   loading, onSend,
 }: RequestBarProps) => (
-  <div className="p-4 flex gap-2 items-center border-b border-border/50 bg-background">
-    <div className="flex-1 flex bg-muted/30 border border-border/50 rounded-md group transition-all relative h-10">
+  <div className="py-4 px-5 flex gap-3 items-center border-b border-border bg-background">
+    <div className="flex-1 flex bg-black/30 border border-border rounded-md group transition-all relative h-10 overflow-hidden shadow-sm">
       <div 
-        className={`px-3 flex items-center gap-2 border-r border-border/50 cursor-pointer select-none transition-colors rounded-l-md
-          ${method === 'GET' ? 'bg-emerald-500/10 text-emerald-500' : 
-            method === 'POST' ? 'bg-amber-500/10 text-amber-500' :
-            method === 'PUT' ? 'bg-blue-500/10 text-blue-500' :
-            method === 'DELETE' ? 'bg-red-500/10 text-red-500' : 'bg-muted text-muted-foreground'}`}
+        className={`px-3 flex items-center gap-2 border-r border-border cursor-pointer select-none transition-colors font-bold text-[13px] bg-white/5
+          ${method === 'GET' ? 'text-emerald-500' : 
+            method === 'POST' ? 'text-amber-500' :
+            method === 'PUT' ? 'text-blue-500' :
+            method === 'DELETE' ? 'text-red-500' : 'text-muted-foreground'}`}
         onMouseDown={(e) => {
           // Prevent blur if input is focused
           if (document.activeElement === urlInputRef.current) {
@@ -79,10 +79,10 @@ const RequestBar = ({
     <button 
       onClick={onSend} 
       disabled={loading}
-      className={`h-10 px-5 rounded-md font-bold text-[13px] flex items-center gap-2 transition-all shadow-[0_0_12px_var(--accent-purple-glow)] 
-        ${loading ? 'opacity-50' : 'bg-primary text-white hover:opacity-90 active:scale-95'}`}
+      className={`h-10 px-5 rounded-xl font-bold text-[13px] flex items-center gap-2 transition-all shadow-[0_0_12px_var(--accent-purple-glow)] border-none
+        ${loading ? 'bg-bg-secondary text-white' : 'bg-primary text-white hover:opacity-90 active:scale-95'}`}
     >
-      <Send size={16} />
+      {loading ? <Zap size={16} className="animate-pulse text-primary" /> : <Send size={16} />}
       {loading ? 'Sending...' : 'Send'}
     </button>
   </div>

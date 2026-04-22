@@ -14,9 +14,10 @@ interface TerminalPanelProps {
   isOpen: boolean;
   onToggle: () => void;
   isMaximized?: boolean;
+  isStatusBarEnabled?: boolean;
 }
 
-const TerminalPanel = ({ isOpen, onToggle, isMaximized }: TerminalPanelProps) => {
+const TerminalPanel = ({ isOpen, onToggle, isMaximized, isStatusBarEnabled }: TerminalPanelProps) => {
   const [tabs, setTabs] = useState<TerminalTab[]>([]);
   const [activeTabId, setActiveTabId] = useState<string | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -154,7 +155,7 @@ const TerminalPanel = ({ isOpen, onToggle, isMaximized }: TerminalPanelProps) =>
       )}
 
       <div
-        className={`absolute bottom-0 left-0 right-0 z-40 flex flex-col transition-[transform,opacity] duration-300 ease-out bg-bg border-t border-border ${isMaximized ? '' : 'rounded-b-[12px]'} ${isOpen ? 'translate-y-0 shadow-[0_-8px_40px_rgba(0,0,0,0.8)] opacity-100' : 'translate-y-full opacity-0 pointer-events-none'}`}
+        className={`absolute left-0 right-0 z-40 flex flex-col transition-[transform,opacity] duration-300 ease-out bg-bg border-t border-border ${isMaximized ? '' : 'rounded-b-[12px]'} ${isOpen ? 'translate-y-0 shadow-[0_-8px_40px_rgba(0,0,0,0.8)] opacity-100' : 'translate-y-full opacity-0 pointer-events-none'} ${isStatusBarEnabled ? 'bottom-7' : 'bottom-0'}`}
         style={{ 
           height: `${height}px`,
           transition: isResizingRef.current ? 'none' : 'transform 0.3s ease-out, opacity 0.3s ease-out'

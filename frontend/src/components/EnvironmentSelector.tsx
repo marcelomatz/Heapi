@@ -23,7 +23,7 @@ const EnvironmentSelector = ({ environments, onSelect, selectedId, onOpenManager
   return (
     <DropdownMenu>
       <DropdownMenuTrigger render={
-        <Button variant="ghost" size="sm" className="gap-2 h-7 px-2 font-normal">
+        <Button variant="outline" size="sm" className={`gap-2 h-7 px-3 font-semibold text-[11px] border-none ${activeEnv ? 'bg-[var(--accent-purple-glow)] text-primary-light hover:bg-[var(--accent-purple-glow)] hover:opacity-80' : 'bg-white/5 text-muted-foreground hover:bg-white/10'}`}>
           <div className="flex items-center gap-2 truncate">
             <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${activeEnv ? 'bg-primary animate-pulse' : 'bg-muted-foreground/30'}`}></div>
             <span className="truncate">{activeEnv ? activeEnv.name : 'No Environment'}</span>

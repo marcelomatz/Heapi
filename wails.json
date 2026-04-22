@@ -9,7 +9,7 @@
   "info": {
     "companyName": "MatzLabs",
     "productName": "Heapi",
-    "productVersion": "0.1.0",
+    "productVersion": "0.1.1",
     "copyright": "Copyright 2026 Marcelo Matz",
     "comments": "The API client built for developers."
   },
